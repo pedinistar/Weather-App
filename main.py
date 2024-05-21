@@ -8,7 +8,6 @@ FONT2 = ("Times New Roman", 10)
 
 
 def data_get():
-    city_name = StringVar()
     city = city_name.get()
     data = requests.get(url=f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}").json()
     w_label1.config(text=data['weather'][0]['main'])
@@ -30,8 +29,9 @@ state_names = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhatti
                "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh",
                "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Lakshadweep", "Puducherry"]
 
-city_name = StringVar
-com = ttk.Combobox(values=state_names, font=FONT, textvariable=city_name)
+city_name = StringVar()
+com = ttk.Combobox(win, text="My Weather App", values=state_names,
+                   font=("Helvetica", 20, "bold"), textvariable=city_name)
 com.place(x=25, y=120, height=50, width=450)
 
 w_label = Label(text="Weather Climate", font=FONT2)
@@ -48,7 +48,6 @@ temp_label = Label(text="Temperature", font=FONT2)
 temp_label.place(x=25, y=400, height=50, width=210)
 temp_label1 = Label(text="", font=FONT2)
 temp_label1.place(x=250, y=400, height=50, width=210)
-
 
 button = Button(text="Done", font=FONT, command=data_get)
 button.place(x=200, y=190, height=50, width=100)
